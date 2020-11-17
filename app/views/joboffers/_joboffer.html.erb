@@ -25,15 +25,16 @@
    <td class="px-6 py-4 bg-white">
   </td>
 
+<div class="text-left">
   <% if user_signed_in? && current_user.admin == true %>
-    <td class="text-center">
+    <td class="">
       <%= link_to edit_joboffer_path(joboffer) do %>
         <%= render_svg "icons/edit" %>
       <% end %>
-      <%= link_to joboffer, method: :delete, data: { confirm: 'Are you sure?' }, class:"mt-2" do %>
+      <%= link_to joboffer, method: :delete, data: { confirm: 'Are you sure?' }do %>
         <%= render_svg "icons/delete" %>
       <% end %>
     </td>
   <% end %>
-
+</div>
 </tr>
