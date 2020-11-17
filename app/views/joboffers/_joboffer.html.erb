@@ -1,0 +1,39 @@
+<tr>
+
+  <td class="flex px-6 py-4">
+    
+    <div class="flex items-center text-sm font-medium leading-5 text-gray-900 ">
+
+      <div class="flex-shrink-0 w-10 h-10">
+        <img class="w-10 h-10 rounded-full" src="https://jrs-technology.com/wp-content/uploads/2016/05/GoogleLOGO256x256.png" alt="">
+      </div>
+
+      <%= link_to joboffer, class:"ml-4" do %>
+        <%= joboffer.title %>
+      <% end %>
+
+    </div>
+
+  </td>
+
+  <td class="px-6 py-4">
+    <div class="text-sm leading-5 text-gray-500">
+      <%= truncate(joboffer.description, length: 200) %>
+    </div>
+  </td>
+
+   <td class="px-6 py-4 bg-white">
+  </td>
+
+  <% if user_signed_in? && current_user.admin == true %>
+    <td class="text-center">
+      <%= link_to edit_joboffer_path(joboffer) do %>
+        <%= render_svg "icons/edit" %>
+      <% end %>
+      <%= link_to joboffer, method: :delete, data: { confirm: 'Are you sure?' }, class:"mt-2" do %>
+        <%= render_svg "icons/delete" %>
+      <% end %>
+    </td>
+  <% end %>
+
+</tr>
