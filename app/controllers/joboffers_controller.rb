@@ -12,6 +12,7 @@ class JoboffersController < ApplicationController
   # GET /joboffers/1.json
   def show
     impressionist @joboffer
+    @candidate = Candidate.new
   end
 
   # GET /joboffers/new
@@ -27,6 +28,7 @@ class JoboffersController < ApplicationController
   # POST /joboffers.json
   def create
     @joboffer = Joboffer.new(joboffer_params)
+    @joboffer.user_id = current_user.id
 
     respond_to do |format|
       if @joboffer.save

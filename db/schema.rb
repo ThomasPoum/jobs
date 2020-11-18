@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_082801) do
+ActiveRecord::Schema.define(version: 2020_11_18_181043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2020_11_18_082801) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "candidates", force: :cascade do |t|
+    t.string "email"
+    t.string "resume"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "joboffer_id"
+    t.index ["joboffer_id"], name: "index_candidates_on_joboffer_id"
+  end
+
   create_table "impressions", force: :cascade do |t|
     t.string "impressionable_type"
     t.integer "impressionable_id"
@@ -79,6 +88,10 @@ ActiveRecord::Schema.define(version: 2020_11_18_082801) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "sumup"
     t.integer "impressions_count"
+    t.bigint "candidate_id"
+    t.bigint "user_id"
+    t.index ["candidate_id"], name: "index_joboffers_on_candidate_id"
+    t.index ["user_id"], name: "index_joboffers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -95,4 +108,7 @@ ActiveRecord::Schema.define(version: 2020_11_18_082801) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "candidates", "joboffers"
+  add_foreign_key "joboffers", "candidates"
+  add_foreign_key "joboffers", "users"
 end

@@ -24,27 +24,37 @@
 
   <td class="px-6 py-4 bg-white">
     <% if joboffer.impressions_count == nil %>
-    <div class="flex flex-1">
-      <%= render_svg "icons/view" %>
+    <div class="flex items-center flex-1">
+      <%= render_svg "icons/view", styles:"icon-sm fill-current text-gray-400" %>
       <span class="ml-2 text-sm leading-5 text-gray-500">0</span>
     </div>
     <% else %>
-    <div class="flex flex-1">
-      <%= render_svg "icons/view" %>
+    <div class="flex items-center flex-1">
+      <%= render_svg "icons/view", styles:"icon-sm fill-current text-gray-400" %>
       <span class="ml-2 text-sm leading-5 text-gray-500"><%= joboffer.impressions_count/2 %></span>
     </div>
     <% end %>
+    <div class="flex items-center flex-1">
+      <%= render_svg "icons/cv", styles:"icon-sm fill-current text-gray-400" %>
+      <span class="ml-2 text-sm leading-5 text-gray-500"><%= joboffer.candidates.count %></span>
+    </div>
   </td>
 
   <div class="text-left">
     <% if user_signed_in? && current_user.admin == true %>
-      <td class="">
-        <%= link_to edit_joboffer_path(joboffer) do %>
-          <%= render_svg "icons/edit" %>
-        <% end %>
-        <%= link_to joboffer, method: :delete, data: { confirm: 'Are you sure?' } do %>
-          <%= render_svg "icons/delete" %>
-        <% end %>
+      <td class="pr-2">
+        <div>
+          <div class="mb-1">
+            <%= link_to edit_joboffer_path(joboffer), class:"mb-1" do %>
+              <%= render_svg "icons/edit", styles:"icon-sm fill-current text-gray-400" %>
+            <% end %>
+          </div>
+          <div>
+          <%= link_to joboffer, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= render_svg "icons/delete", styles:"icon-sm fill-current text-gray-400" %>
+          <% end %>
+          </div>
+        </div>
       </td>
     <% end %>
   </div>

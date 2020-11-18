@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'inline_svg', '~> 1.7', '>= 1.7.1'
 gem 'impressionist'
+gem 'ransack', '~> 2.3', '>= 2.3.2'
+gem 'carrierwave', '~> 2.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
