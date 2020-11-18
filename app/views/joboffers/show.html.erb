@@ -1,5 +1,9 @@
-<%= content_for :primary_content do %>
 
+
+<%= content_for :primary_content do %>
+<div class="mb-2 ml-1">
+<%= link_to "back to jobList", joboffers_path, class:"text-xs  font-light underline text-gray-400" %>
+</div>
   <div class="overflow-hidden bg-white shadow sm:rounded-lg">
     <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
       <h3 class="text-lg font-medium leading-6 text-gray-900">
@@ -9,7 +13,7 @@
         Personal details and application.
       </p>
     </div>
-    <div>
+    <div class="te">
       <dl>
         <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-sm font-medium leading-5 text-gray-500">
@@ -75,7 +79,7 @@
           or drag and drop
         </p>
         <p class="mt-1 text-xs text-gray-500">
-          PDF, Word, Pages up to 10MB
+          PDF, Word, Pages up to 5MB
         </p>
       </div>
     </div>
@@ -84,14 +88,25 @@
 
 
 
-<div class="w-1/2 mt-6 text-center btn btn-blue btn-small">Postulate</div>
+<div class="w-1/2 mt-6 text-center btn btn-blue btn-small">Apply</div>
 
 
 <% end %>
 
 <%= content_for :tercery_content do %>
 
-<%= link_to "Back to jobList", joboffers_path, class:"btn btn-outline btn-small"%>
+<div class="flex-col">
+  
+    <% if @joboffer.impressions_count == nil %>
+      <div class="mt-4 text-lg font-medium leading-6 text-gray-900">
+        This job offer has been seen 0 times.
+      </div>
+    <% else %>
+      <div class="mt-4 text-lg font-medium leading-6 text-gray-900">
+        This job offer has been seen <%= (@joboffer.impressions_count)/2 %> times.
+      </div>
+  <% end %>
+</div>
 
 <% end %>
 

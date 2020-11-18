@@ -1,15 +1,17 @@
 class JoboffersController < ApplicationController
   before_action :set_joboffer, only: [:show, :edit, :update, :destroy]
+  impressionist :actions=>[:show]
 
   # GET /joboffers
   # GET /joboffers.json
   def index
-    @joboffers = Joboffer.all
+    @joboffers = Joboffer.all.order(created_at: :DESC)
   end
 
   # GET /joboffers/1
   # GET /joboffers/1.json
   def show
+    impressionist @joboffer
   end
 
   # GET /joboffers/new
