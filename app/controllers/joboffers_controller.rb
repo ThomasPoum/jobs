@@ -1,5 +1,5 @@
 class JoboffersController < ApplicationController
-  before_action :set_joboffer, only: [:show, :edit, :update, :destroy]
+  before_action :set_joboffer, only: [:show, :edit, :update, :destroy, :apply]
   impressionist :actions=>[:show]
 
   # GET /joboffers
@@ -14,6 +14,7 @@ class JoboffersController < ApplicationController
     @candidate = Candidate.new
     @candidate.email = session[:email]
     @candidate.resume = session[:resume]
+    params[:candidate_id] = session[:session_candidate_id]
     
     if session[:view_id]
         session[:view_id].push(@joboffer.id).uniq!
@@ -21,7 +22,15 @@ class JoboffersController < ApplicationController
       session[:view_id] = [@joboffer.id]
     end
   
-end
+  end
+
+  def apply
+    
+    @joboffer.update(joboffer_params)
+    
+    redirect_to root_path
+
+  end
 
   # GET /joboffers/new
   def new

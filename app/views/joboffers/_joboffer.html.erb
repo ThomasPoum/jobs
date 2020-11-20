@@ -30,7 +30,7 @@
     </div>
     <% else %>
     <div class="flex items-center flex-1">
-      <% if  session[:view_id].include? joboffer.id %>
+      <% if  session[:view_id].include? joboffer.id && !current_user.admin %>
         <%= render_svg "icons/view", styles:"icon-sm fill-current text-green-400" %>
         <span class="ml-2 text-sm leading-5 text-green-500"><%= joboffer.impressions_count %></span>
       <% else %>
@@ -40,7 +40,7 @@
     </div>
     <% end %>
     <div class="flex items-center flex-1">
-    <% if joboffer.candidates.ids.include? session[:session_candidate_id] %>
+    <% if joboffer.candidates.ids.include? session[:session_candidate_id] && !current_user.admin %>
       <%= render_svg "icons/cv", styles:"icon-sm fill-current text-green-400" %>
       <span class="ml-2 text-sm leading-5 text-green-500"><%= joboffer.candidates.count %></span>
     <% else %>

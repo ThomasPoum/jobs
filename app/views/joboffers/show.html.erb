@@ -111,6 +111,7 @@
               You already applied to this job offer.
             </div>
           <% else %>
+
             <div class="flex flex-col justify-start">
               <div class="mb-4 text-lg font-medium leading-6 text-gray-900">
                 Apply with your informations
@@ -126,9 +127,12 @@
                 </p>
               </div>
             </div>
-           
-            <%= link_to "Apply", apply_path(@joboffer), class:"btn btn-blue btn-small mt-10 p-2" %>
+
+
+            <%= link_to "#", class:"btn btn-blue btn-small mt-10 p-2" %>
+            <%= params %>
           <% end %>
+          
         <% end %>
   </div>
 <% else %>
