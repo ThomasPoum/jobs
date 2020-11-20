@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   get :search, controller: "application"
 
+  patch '/apply/:id', to: 'joboffers#apply', as: "apply"
+
 end

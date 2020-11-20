@@ -30,13 +30,23 @@
     </div>
     <% else %>
     <div class="flex items-center flex-1">
-      <%= render_svg "icons/view", styles:"icon-sm fill-current text-gray-400" %>
-      <span class="ml-2 text-sm leading-5 text-gray-500"><%= joboffer.impressions_count/2 %></span>
+      <% if  session[:view_id].include? joboffer.id %>
+        <%= render_svg "icons/view", styles:"icon-sm fill-current text-green-400" %>
+        <span class="ml-2 text-sm leading-5 text-green-500"><%= joboffer.impressions_count %></span>
+      <% else %>
+        <%= render_svg "icons/view", styles:"icon-sm fill-current text-gray-400" %>
+        <span class="ml-2 text-sm leading-5 text-gray-500"><%= joboffer.impressions_count %></span>
+      <% end %>
     </div>
     <% end %>
     <div class="flex items-center flex-1">
+    <% if joboffer.candidates.ids.include? session[:session_candidate_id] %>
+      <%= render_svg "icons/cv", styles:"icon-sm fill-current text-green-400" %>
+      <span class="ml-2 text-sm leading-5 text-green-500"><%= joboffer.candidates.count %></span>
+    <% else %>
       <%= render_svg "icons/cv", styles:"icon-sm fill-current text-gray-400" %>
       <span class="ml-2 text-sm leading-5 text-gray-500"><%= joboffer.candidates.count %></span>
+    <% end %>
     </div>
   </td>
 
@@ -58,5 +68,6 @@
       </td>
     <% end %>
   </div>
-  
+
 </tr>
+

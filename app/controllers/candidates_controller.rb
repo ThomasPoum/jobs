@@ -1,18 +1,22 @@
 class CandidatesController < ApplicationController
-
+  before_action :set_joboffer, only: [:new, :create]
+  before_action :set_candidate, only: :show
 
   def new
     @candidate = Candidate.new
   end
 
   def create
-    @candidate = Candidate.new(candidate_params)
+    @candidate = Candidate.create(candidate_params)
+    session[:session_candidate_id] = @candidate.id
+    session[:email] = @candidate.email
+    session[:resume_name] = request.params.values
 
     respond_to do |format|
       if @candidate.save
-        format.html { redirect_to root_path, notice: 'candidate was successfully created.' }
+        format.html { redirect_to @joboffer, notice: 'You applied to this job' }
       else
-        format.html { redirect_to root_path, alert: 'candidate was not successfully created.' }
+        format.html { redirect_to @joboffer, alert: 'A problem was detected during your apply' }
       end
     end
 
@@ -30,6 +34,14 @@ class CandidatesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def candidate_params
     params.require(:candidate).permit(:email, :resume, :joboffer_id)
+  end
+
+  def set_joboffer
+    @joboffer = Joboffer.find_by(params[:id])
+  end
+
+  def set_candidate
+    @candidate = Candidate.find(params[:id])
   end
 
 

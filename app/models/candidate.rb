@@ -1,6 +1,8 @@
 class Candidate < ApplicationRecord
-  mount_uploader :resume, CvUploader
 
   has_many :joboffers
+
+  validates :email, presence: true
+  validates :resume, presence: true
   
 end

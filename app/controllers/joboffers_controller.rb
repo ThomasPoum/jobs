@@ -11,9 +11,17 @@ class JoboffersController < ApplicationController
   # GET /joboffers/1
   # GET /joboffers/1.json
   def show
-    impressionist @joboffer
     @candidate = Candidate.new
-  end
+    @candidate.email = session[:email]
+    @candidate.resume = session[:resume]
+    
+    if session[:view_id]
+        session[:view_id].push(@joboffer.id).uniq!
+    else
+      session[:view_id] = [@joboffer.id]
+    end
+  
+end
 
   # GET /joboffers/new
   def new
@@ -73,6 +81,6 @@ class JoboffersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def joboffer_params
-      params.require(:joboffer).permit(:title, :description)
+      params.require(:joboffer).permit(:title, :description, :candidate_id)
     end
 end
